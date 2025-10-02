@@ -17,8 +17,8 @@ function LandingPage() {
   const [mission, setMission] = useState(false);
   const [contact, setContact] = useState(false);
   return (
-    <div className='h-screen w-screen flex items-center justify-center flex-col bg-[#000110]'>
-      <div className='w-[40vw] font-mono'>
+    <div className='h-screen w-screen flex items-center justify-center flex-col bg-[#000109]'>
+      <div className='body-landing font-mono'>
         <h1 className='text-2xl mb-5'><ConsoleSpinner/>&nbsp;Innovation Labs @ UC Davis</h1>
         <h3 className='mb-5'><b>Don't wait for innovation. Become it.</b></h3>
         <h4>In this current age of AI, most startups, companies, and builders are shipping products that just apply AI to a use case <b>without innovation</b>.<br/><br/>We, at UCD Innovation Labs, strive to integrate state-of-the-art Artificial Intelligence techniques with hardware to building products that not only <b>wow</b> people but also solve problems.</h4>
@@ -58,7 +58,7 @@ function LandingPage() {
 
         <br/>
 
-        <div className='flex items-center justify-end gap-3'>
+        <div className='flex items-center justify-end gap-5'>
           <Instagram onClick={() => window.open("https://www.instagram.com/ucd.innovationlabs/", "_self")} className={`${!contact ? "text-transparent" : ""}`}/>
           <Dialog>
             <DialogTrigger>

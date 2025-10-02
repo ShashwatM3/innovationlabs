@@ -120,3 +120,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+.body-landing {
+  width: 700px;
+}
+
+@media (max-width: 800px) {
+  .body-landing {
+    width: 500px;
+  }
+}
+
+@media (max-width: 560px) {
+  .body-landing {
+    width: 400px;
+  }
+}
+
+@media (max-width: 440px) {
+  .body-landing {
+    width: 300px;
+    font-size: 1.5vh;
+  }
+}
+
+@media (max-width: 340px) {
+  .body-landing {
+    width: 250px;
+    font-size: 1.5vh;
+  }
+}
