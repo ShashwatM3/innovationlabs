@@ -1,4 +1,14 @@
 'use client'
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import React, { useState } from 'react'
 import ConsoleSpinner from './ConsoleSpinner'
 import {
@@ -9,15 +19,63 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Instagram, Mail, MoveDown, MoveRight, TreePalm } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Code2Icon, Instagram, Mail, MoveDown, MoveRight, TreePalm, Workflow } from 'lucide-react';
 import { toast } from 'sonner';
+import WaverCircle from "./WaverCircle"
+import { Code2 } from "lucide"
 
 function LandingPage() {
   const [vision, setVision] = useState(false);
   const [mission, setMission] = useState(false);
   const [contact, setContact] = useState(false);
+  const [projects, setProjects] = useState(false);
+  const [blur, setBlur] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  const aiGlassesDescription = `We are building the next frontier of wearable technology by combining modern artificial intelligence techniques to produce a second brain for a user and interact with the brain by just speaking to the AI Glasses. By providing access to personal knowledge, class schedules, and academic todos, this will be an all-in-one personal assistant for anyone at UC Davis.`;
+
+  const timeline = [
+    {
+      title: "Apps open",
+      date: "9/28",
+      description: "Applications open for all positions",
+      link: ""
+    },
+    {
+      title: "1st Info Night",
+      date: "10/1",
+      description: "Online Info Night @ 8:10 p.m"
+    },
+    {
+      title: "2nd Info Night",
+      date: "10/3",
+      description: "Online Info Night @ 8:10 p.m"
+    },
+    {
+      title: "Apps close + Invites sent",
+      date: "10/9",
+      description: "Key applications get sent interview invites"
+    },
+    {
+      title: "Interviews",
+      date: "10/10",
+      description: "Interview all viable members"
+    },
+  ]
+
   return (
     <div className='h-screen w-screen flex items-center justify-center flex-col bg-[#000109]'>
+      {blur && (
+        <div className="absolute inset-0 bg-black/0 backdrop-blur-lg pointer-events-none z-2"></div>
+      )}
       <div className='body-landing font-mono'>
         <h1 className='text-2xl mb-5'><ConsoleSpinner/>&nbsp;Innovation Labs @ UC Davis</h1>
         <h3 className='mb-5'><b>Don't wait for innovation. Become it.</b></h3>
@@ -49,10 +107,34 @@ function LandingPage() {
         )}
         <br/>
         <div className='flex items-center gap-3 cursor-pointer justify-between'>
-          <a onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSc198IgwGXfZIY3Hk1Sj4LPIYdXLc7_xqhUduq01Q6OOvqSzQ/viewform", "_self")} className='hover:text-blue-500 transition-all text-orange-300'>Join us</a>
+          <a onClick={() => window.open("https://bit.ly/ilabsucd", "_self")} className='hover:text-blue-500 transition-all text-orange-300'>Join us</a>
           <div className='flex items-center gap-3'>
             <a onClick={() => setContact(!contact)} className='hover:text-blue-500 transition-all text-white font-bold border p-2 px-3 border-neutral-700'>Contact</a>
-            <a className='hover:text-blue-500 transition-all text-white font-bold border p-2 rounded px-3 border-neutral-700'>Updates</a>
+            <Sheet>
+              <SheetTrigger>
+                <a className='hover:text-blue-500 transition-all text-white font-bold border p-2 rounded px-3 border-neutral-700'>Updates</a>
+              </SheetTrigger>
+              <SheetContent className='p-5 font-mono overflow-scroll'>
+                <SheetHeader>
+                  <SheetTitle>Current Timeline</SheetTitle>
+                  <SheetDescription>
+                  </SheetDescription>
+                  <br/>
+                  <div className=''>
+                    {timeline.map((event) => (
+                      <div key={event.title} className='mb-5'>
+                        <h1 className='font-bold text-lg mb-2'>{event.date} — {event.title}</h1>
+                        <h3 className='text-neutral-400'>{event.description}</h3>
+                      </div>
+                    ))}
+                  </div>
+                </SheetHeader>
+              </SheetContent>
+            </Sheet>
+            <Button onClick={() => {
+              setProjects(true);
+              setBlur(true);
+            }} className="bg-blue-700 text-white rounded-none hover:bg-blue-800 cursor-pointer">Projects</Button>
           </div>
         </div>
 
@@ -70,9 +152,10 @@ function LandingPage() {
                 <DialogDescription>
                   <br/>
                   You can mail us at&nbsp; <><a onClick={async () => {
-                    await navigator.clipboard.writeText("Innovationlabsatdavis@gmail.com");
+                    await navigator.clipboard.writeText("ilabsucd@gmail.com");
                     toast.success("Email address copied to clipboard")
-                  }} className='text-neutral-500 border-b pb-1 hover:text-white transition-all cursor-pointer hover:border-neutral-400'>Innovationlabsatdavis@gmail.com</a></>
+                  }} className='text-neutral-500 border-b pb-1 hover:text-white transition-all cursor-pointer hover:border-neutral-400'>ilabsucd@gmail.com
+</a></>
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
@@ -80,6 +163,48 @@ function LandingPage() {
           <TreePalm onClick={() => window.open("https://linktr.ee/innovationlabsdavis")} className={`${!contact ? "text-transparent" : ""}`}/>
         </div>
       </div>
+
+      <Dialog open={projects}>
+        <DialogTrigger className="hidden">Open</DialogTrigger>
+        <DialogContent className="min-w-[40vw] p-8 bg-black font-mono">
+          <DialogHeader>
+            <DialogTitle className="mb-4 flex items-center gap-3"><Code2Icon/>Projects</DialogTitle>
+            {/* AI Glasses */}
+            <Card className="bg-transparent">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <WaverCircle/>
+                  <h1>FQ 2025</h1>
+                </CardTitle>
+                <CardAction>
+                  <Button onClick={() => window.open("https://bit.ly/ilabsucd", "_self")} className="cursor-pointer" variant={'secondary'}>Join the project</Button>
+                </CardAction>
+              </CardHeader>
+              <CardContent>
+                <h1 className="scroll-m-20 text-xl font-semibold tracking-tight mb-3">
+                  AI Glasses
+                </h1>
+                
+                {/* Description with See More */}
+                <h3 className="text-neutral-500">
+                  {showMore 
+                    ? aiGlassesDescription 
+                    : aiGlassesDescription.slice(0, 140) + "..."}
+                </h3>
+                <button
+                  onClick={() => setShowMore(!showMore)}
+                  className="text-blue-400 hover:text-blue-500 mt-2 text-sm"
+                >
+                  {showMore ? "See less" : "See more"}
+                </button>
+              </CardContent>
+            </Card>
+
+            <br/>
+            <Button variant={'outline'} className="w-fit cursor-pointer" onClick={() => {setProjects(false);setBlur(false)}}>Close Projects</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
