@@ -24,7 +24,7 @@ function LandingPage() {
         <h4>In this current age of AI, most startups, companies, and builders are shipping products that just apply AI to a use case <b>without innovation</b>.<br/><br/>We, at UCD Innovation Labs, strive to integrate state-of-the-art Artificial Intelligence techniques with hardware to building products that not only <b>wow</b> people but also solve problems.</h4>
         <br/>
         <div className='flex items-center gap-2'>
-          <h3 className='font-bold mb-2'>Our Vision</h3>
+          <h3 onClick={() => setVision(!vision)} className='font-bold mb-2'>Our Vision</h3>
           {vision ? (
             <MoveDown onClick={() => setVision(false)} className='h-4 w-auto mb-2 text-neutral-300'/>
           ): (
@@ -37,7 +37,7 @@ function LandingPage() {
 
 
         <div className='flex items-center gap-2'>
-          <h3 className='font-bold mb-2'>Our Mission</h3>
+          <h3 onClick={() => setMission(!mission)} className='font-bold mb-2'>Our Mission</h3>
           {mission ? (
             <MoveDown onClick={() => setMission(false)} className='h-4 w-auto mb-2 text-neutral-300'/>
           ): (
